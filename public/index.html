@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Gacha Payant</title>
+  <title>Juuj Town Gacha</title>
   <style> body { font-family: Arial; text-align: center; padding: 50px; background: #222; color: white; } button { padding: 20px 40px; font-size: 2em; background: #ff4500; color: white; border: none; border-radius: 10px; cursor: pointer; } </style>
 </head>
 <body>
   <h1>🔥 GACHA PULL 🔥</h1>
-  <p>1€ = 1 tirage chance légendaire !</p>
+  <p>1€ = 1 loot !</p>
   
   <select id="banner">
     <option value="standard">Banner Standard</option>
@@ -16,14 +16,14 @@
   <br><br>
   <button onclick="buyPull()">SUMMON (1€)</button>
   
-  <p><small>Test: Carte 4242 4242 4242 4242 (tout OK)</small></p>
+  <p><small>Test: Card 4242 4242 4242 4242 (OK)</small></p>
 
   <script>
   async function buyPull() {
     const banner = document.getElementById('banner').value;
     
     // Ajoute cette ligne pour voir dans la console si tout est bon
-    console.log("Banner sélectionné :", banner);
+    console.log("Selected banner :", banner);
   
     const response = await fetch('/create-checkout-session', {
       method: 'POST',
