@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gacha Payant</title>
+  <style> body { font-family: Arial; text-align: center; padding: 50px; background: #222; color: white; } button { padding: 20px 40px; font-size: 2em; background: #ff4500; color: white; border: none; border-radius: 10px; cursor: pointer; } </style>
+</head>
+<body>
+  <h1>🔥 GACHA PULL 🔥</h1>
+  <p>1€ = 1 tirage chance légendaire !</p>
+  
+  <select id="banner">
+    <option value="standard">Banner Standard</option>
+    <option value="banner1">Banner Rate-up (x2 LR!)</option>
+  </select>
+  
+  <br><br>
+  <button onclick="buyPull()">SUMMON (1€)</button>
+  
+  <p><small>Test: Carte 4242 4242 4242 4242 (tout OK)</small></p>
+
+  <script>
+    async function buyPull() {
+      const banner = document.getElementById('banner').value;
+      const response = await fetch('/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ banner })
+      });
+      const { url } = await response.json();
+      window.location.href = url; // Redirige vers Stripe Checkout
+    }
+  </script>
+</body>
+</html>
