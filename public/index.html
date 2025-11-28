@@ -19,16 +19,28 @@
   <p><small>Test: Carte 4242 4242 4242 4242 (tout OK)</small></p>
 
   <script>
-    async function buyPull() {
-      const banner = document.getElementById('banner').value;
-      const response = await fetch('/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ banner })
-      });
-      const { url } = await response.json();
-      window.location.href = url; // Redirige vers Stripe Checkout
+  async function buyPull() {
+    const banner = document.getElementById('banner').value;
+    
+    // Ajoute cette ligne pour voir dans la console si tout est bon
+    console.log("Banner sélectionné :", banner);
+  
+    const response = await fetch('/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ banner: banner })  // ← ici c'était probablement "banner" sans valeur
+    });
+  
+    const data = await response.json();
+    
+    if (data.url) {
+      window.location.href = data.url;  // Redirige vers Stripe
+    } else {
+      alert("Erreur Stripe : " + (data.error || "inconnue"));
     }
+  }
   </script>
 </body>
 </html>
